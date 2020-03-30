@@ -6,4 +6,7 @@ For Windows
 	5)Copy downloaded github repository inside to htdocs folder in xampp folder.
 	6)Open browser then copy this link to search bar (localhost/476Project).
 
-NOTE: It may take some time to create the database(max:2mins)
+NOTE: It may take some time to create the database (max:1-2mins)
+	if you have an error like "Fatal error: Maximum execution time of 120 seconds exceeded in C:\xampp\htdocs\476Project\index.php on line 61"
+	Find php.ini file (usually in C:\xampp\php\php.ini)
+	Find this line "max_execution_time = 30" and set this like "max_execution_time=360" and try again later.
