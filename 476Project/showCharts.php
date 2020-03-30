@@ -5,7 +5,7 @@
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
     <script type="text/javascript">
         
-        function showHeatmap(iid ,locations, check){
+        function showHeatmap(iid ,locations, check, text){
             //console.log("Locations: " , locations);
             if(check == 1){
                 var id = "map" + iid;
@@ -25,8 +25,10 @@
                     var heat = L.heatLayer(addressPoints, {minOpacity: 0.2, blur:15, radius: 40}).addTo(map);
 
                     var sid = "s"+iid
-                    //console.log(sid);
-                    document.getElementById(sid).innerText = 2020-iid+1;
+                    var year = 2010+iid;
+                    if(iid == 0)
+                        year += 10;
+                    document.getElementById(sid).innerText = year + " (" + text + ")";
 
                 //console.log("SHOW MAP RUN");
                 }else 
@@ -82,24 +84,34 @@
 
         }
 
-        function showDataPie(id, dataPoints){
+        function showDataPie(id, dataPoints, text){
             var chart = new CanvasJS.Chart(id, {
-            animationEnabled: true,
-            title: {
-                text: "Distribution of Products by Citys"
-            },
-            subtitles: [{
-                text: "2014-2020"
-            }],
-            data: [{
-                type: "pie",
-                yValueFormatString: "#,##0.00\"%\"",
-                indexLabel: "{label} ({y})",
-                dataPoints: dataPoints
-            }]
+                animationEnabled: true,
+                title: {
+                    text: "Distribution of Products by " + text-align
+                },
+                subtitles: [{
+                    text: "2014-2020"
+                }],
+                data: [{
+                    type: "pie",
+                    yValueFormatString: "#,##0.00\"%\"",
+                    indexLabel: "{label} ({y})",
+                    dataPoints: dataPoints
+                }]
             });
             chart.render();
          
+        }
+
+        function deleteDivs(start, end){
+            //console.log("DELETE DİVSS ");
+            for(var i=2014; i<2021; i++){
+                if((i < start || i > end) && i != 2017){
+                    var div = document.getElementById("map"+(i%10));
+                    div.parentNode.removeChild(div);
+                }
+            }
         }
 
                         
@@ -213,7 +225,7 @@
                 <div class="yiyecek"><input name="urunler[]" value="bal" type="checkbox">Bal</div>
                 <div class="yiyecek"><input name="urunler[]" value="cikolata" type="checkbox">Çikolata</div>
                 <div class="içecek"><input name="urunler[]" value="cay" type="checkbox">Çay,Kahve,Bitki Çayı</div>
-                <div class="yiyecek"><input name="urunler[]" value="bitkisel" type="checkbox">Bitkisel Yağ ve Margarin</div>
+                <div class="yiyecek"><input name="urunler[]" value="yag" type="checkbox">Bitkisel Yağ ve Margarin</div>
                 <div  class="both"><input name="urunler[]" value="sut"  type="checkbox">Süt ve Süt ürünleri</div>
                 <div  class="yiyecek"><input name="urunler[]" value="et" type="checkbox">Et ve Et ürünleri</div>
                 <div class="both"><input name="urunler[]" value="takviye" type="checkbox">Takviye Edici Gıdalar ve ürünler</div>
@@ -224,38 +236,38 @@
             <button id="onayButonu" type="submit" name="submit" style="margin: 5px" class="btn btn-primary">Onayla</button>
     </form>
 </div>
-    <div style="width: 100%;height: 100%" id="chartDivs" class="container">
+<div style="width: 100%;height: 100%" id="chartDivs" class="container">
             <div id="heatMapDiv" style="width: 100%;height: 70%;">
                 <div class="slideshow-container">
                     <a class="prev" style="position: relative;left: 50%" onclick="plusSlides(-1)">&#10094;</a>
                     <a class="next" style="position: relative;left: 50%" onclick="plusSlides(1)">&#10095;</a>
                 </div>
             </div>
-            <div style="width: 1000px; height: 450px; margin-bottom: 25px; margin-left: 25px;">
-                <span id="s1"></span>
-                <div id="map1" style="width: 100%; height: 100%; margin-bottom: 15px;" class="map" ></div>
+            <div style="width: 1000px; height: 450px; margin-bottom: 25px; margin-left: 25px; margin-top: 25px;">
+                <span id="s0"></span>
+                <div id="map0" style="width: 100%; height: 100%; margin-bottom: 15px;" class="map" ></div>
 
-                <span id="s2"></span>
-                <div id="map2" style="width: 100%; height: 100%; margin-bottom: 15px;" class="map" ></div>
+                <span id="s9"></span>
+                <div id="map9" style="width: 100%; height: 100%; margin-bottom: 15px;" class="map" ></div>
 
-                <span id="s3"></span>
-                <div id="map3" style="width: 100%; height: 100%; margin-bottom: 15px;" class="map" ></div>
-
-                <span id="s5"></span>
-                <div id="map5" style="width: 100%; height: 100%; margin-bottom: 15px;" class="map" ></div>
+                <span id="s8"></span>
+                <div id="map8" style="width: 100%; height: 100%; margin-bottom: 15px;" class="map" ></div>
 
                 <span id="s6"></span>
                 <div id="map6" style="width: 100%; height: 100%; margin-bottom: 15px;" class="map" ></div>
 
-                <span id="s7"></span>
-                <div id="map7" style="width: 100%; height: 100%; margin-bottom: 15px;" class="map" ></div>
+                <span id="s5"></span>
+                <div id="map5" style="width: 100%; height: 100%; margin-bottom: 15px;" class="map" ></div>
 
-                <span id="s4">2014 - 2020</span>
+                <span id="s4"></span>
+                <div id="map4" style="width: 100%; height: 100%; margin-bottom: 15px;" class="map" ></div>
+
+                <span id="sall">2014 - 2020</span>
                 <div id="all" style="width: 100%; height: 100%; margin-bottom: 15px;" class="map" ></div>
             
             </div>
             
-    </div>
+</div>
     
 
 
@@ -272,7 +284,25 @@
             $eyear = $_POST['eyear'];
             $urunler = $_POST['urunler']; // ARRAY
             $lineDataPoints = array();
-
+            
+            $sql_urun = "SELECT latitude, longitude FROM products WHERE (";
+            $liste = "";
+            for ($i=0; $i<count($urunler); $i++) {
+                if($urunler[$i] != "tum"){
+                    if($i == count($urunler)-1){
+                        if($urunler[$i] != "diger")
+                            $sql_urun .= "product_category LIKE '%" . $urunler[$i] . "%'";
+                        else 
+                            $sql_urun .= "NOT (product_category LIKE '%cikolata%' OR product_category LIKE '%bal%' OR product_category LIKE '%cay%' OR product_category LIKE '%et%' OR product_category LIKE '%sut%' OR product_category LIKE '%takviye%' OR product_category LIKE '%yag%')";
+                        $liste .= handleProductName($urunler[$i]); 
+                    }else{
+                        if($urunler[$i] != "diger")
+                            $sql_urun .= "product_category LIKE '%" . $urunler[$i] . "%' OR ";
+                        $liste .= handleProductName($urunler[$i]) . ", "; 
+                    }
+                }
+            }
+            
             $iller = array(
                 "adana" => array("Adana" => 0),
                 "adiy" => array("Adıyaman" => 0),
@@ -384,15 +414,52 @@
                 array_push($dataPie, array("label"=> $key, "y"=>(100*$value/3833)));
             }
 
-            array_splice($dataPie, 0, count($dataPie)-60);
+            array_splice($dataPie, 0, count($dataPie)-30);
             
             foreach (array_values($dataPie) as $element) {
                 $total_for_pie += $element['y']*3833/100;
             }
-
-            $others = 3833-$total_for_pie;
-            array_push($dataPie, array("label"=>"Diğer", "y"=>(100*(3833-$total_for_pie)/3833)));
             
+            $others = 3833-$total_for_pie;
+            array_push($dataPie, array("label"=>"Diğer", "y"=>(100*$others/3833)));
+            
+            $categories = array(
+                "bal" => array("Bal" => 0),
+                "cikolata" => array("Çikolata" => 0),
+                "cay" => array("Çay, Kahve ve Bitki Çayı" => 0),
+                "yag" => array("Bitkisel Yağ ve Margarin" => 0),
+                "sut" => array("Süt ve Süt ürünleri" => 0),
+                "et" => array("Et ve Et ürünleri" => 0),
+                "takviye" => array("Takviye Edici Gıdalar ve ürünleri" => 0),
+                "diger" => array("Diğer Ürünler" => 0)
+            );
+
+            foreach ($categories as $key => $value) {
+                if($key != "diger")
+                    $sql_categories = "SELECT * FROM products WHERE product_category LIKE '%$key%'";
+                else 
+                    $sql_categories = "SELECT * FROM products WHERE NOT (product_category LIKE '%cikolata%' OR product_category LIKE '%bal%' OR product_category LIKE '%cay%' OR product_category LIKE '%et%' OR product_category LIKE '%sut%' OR product_category LIKE '%takviye%' OR product_category LIKE '%yag%')";
+                if(!$category_result = mysqli_query($conn, $sql_categories))
+                    echo "Query Error: " . mysqli_error($conn);
+
+                foreach ($categories[$key] as $key2 => $value2) {
+                    $categories[$key][$key2] = mysqli_num_rows($category_result);
+                }
+            }
+
+            $temp2 = array();
+            foreach (array_values($categories) as $key => $value) {
+                foreach ($value as $key2 => $value2) {
+                    $temp2[$key2] = $value2;
+                }
+            }
+
+            $dataCategory = array();
+            foreach ($temp2 as $key => $value) {
+                array_push($dataCategory, array("label" => $key, "y" => (100*$value/3833)));
+            }
+            
+
             for($year=2014; $year<=2020; $year++){
 
                 $sql_line = "SELECT company FROM products WHERE document_date ='$year'";
@@ -407,10 +474,14 @@
 
             for($year=intval($syear); $year<=intval($eyear); $year++ ){
                 if($year == 2017) continue;
-                $sql_heat = "SELECT latitude, longitude FROM products WHERE product_category LIKE '%$urunler[0]%' AND document_date='$year'";
-                
-                
 
+                if((count($urunler) == 1 && $urunler[0] == "tum") || count($urunler) == 9){
+                    $sql_heat = "SELECT latitude, longitude FROM products WHERE document_date='$year'";
+                }else{
+                    $sql_heat = $sql_urun .") AND document_date='$year'";
+                }
+                
+                //exit($sql_heat);
                 if(!$heat_result = mysqli_query($conn, $sql_heat))
                   echo "Querry Error: " . mysqli_error($conn);
                 
@@ -418,9 +489,9 @@
                 $locations = array();
                 $location = array();
                 
-                    $products = mysqli_fetch_all($heat_result, MYSQLI_ASSOC);
-                    foreach($products as $product){
-                      if(!empty($product['latitude']) && !empty($product['longitude'])){
+                $products = mysqli_fetch_all($heat_result, MYSQLI_ASSOC);
+                foreach($products as $product){
+                    if(!empty($product['latitude']) && !empty($product['longitude'])){
                         if(is_numeric($product['latitude']) && is_numeric($product['longitude'])){
                           array_push($location, floatval($product['latitude']), floatval($product['longitude']));
                           array_push($locations, $location);
@@ -428,27 +499,33 @@
                           unset($location);
                           $location = array();
                         }
-                      }
                     }
-                    $all_locations[intval($year)] = $locations;
-                    unset($locations);
-                    $locations = array();
+                }
+                $all_locations[intval($year)] = $locations;
+                unset($locations);
+                $locations = array();
             }
             $all_locations['all'] = $all;
             //echo "LLLLLLLLLLLLL</br>";
             if (count($dataPie) > 0) {
                 ?> 
                 <script type=text/javascript>
-                    setTimeout(() => createDivz(0,1), 1000);
-                    setTimeout(() => showDataPie("chart", <?php echo json_encode($dataPie, JSON_NUMERIC_CHECK); ?>), 1000);
-                        
+                    setTimeout(() => createDivz(0,2), 1000);
+                    setTimeout(() => showDataPie("chart", <?php echo json_encode($dataPie, JSON_NUMERIC_CHECK); ?>, <?php echo json_encode("Cities", JSON_NUMERIC_CHECK); ?>), 1000);   
                  </script>
             <?php
+            }
+            if(count($dataCategory) > 0){
+                ?> 
+                    <script type=text/javascript>
+                        setTimeout(() => showDataPie("chart1", <?php echo json_encode($dataCategory, JSON_NUMERIC_CHECK); ?>, <?php echo json_encode("Categories", JSON_NUMERIC_CHECK); ?>), 1000);
+                    </script>
+                <?php
             }
             if(count($lineDataPoints) > 0){
                 ?> 
                 <script type=text/javascript>
-                    setTimeout(() => showLineChart("chart1", <?php echo json_encode($lineDataPoints, JSON_NUMERIC_CHECK); ?>, "Products"), 1000);
+                    setTimeout(() => showLineChart("chart2", <?php echo json_encode($lineDataPoints, JSON_NUMERIC_CHECK); ?>, "Products"), 1000);
                     setTimeout(() => showHeatmap("all", <?php echo json_encode($all); ?>, 0), 1000);
                 </script>
                 <?php
@@ -457,16 +534,42 @@
                 //echo "HARITA";
                 for($i=$syear; $i<=$eyear; $i++){
                     if($i == 2017) continue;
-                    $index = ($eyear - $i+1);
+                    //$index = ($eyear - $i+1);
                 ?> 
                     <script type=text/javascript>
-                        setTimeout(() => showHeatmap(<?php echo json_encode($index); ?>, <?php echo json_encode($all_locations[strval($i)]); ?>, 1), 1000);
+                        setTimeout(() => showHeatmap(<?php echo json_encode($i%10); ?>, <?php echo json_encode($all_locations[strval($i)]); ?>, 1, <?php echo json_encode($liste); ?>), 1000);
                         //setTimeout(() => showHeatmap("map", <?php //echo json_encode($all); ?>, 5), 1000);
                     </script>
                 <?php
               }
+              ?>
+                    <script type=text/javascript>
+                        setTimeout(() => deleteDivs(<?php echo json_encode($syear); ?>, <?php echo json_encode($eyear); ?>), 1000); 
+                    </script>
+              <?php
             }
         }else echo "BULAMADIII";
+    }
+
+    function handleProductName($str){
+        if($str == "cikolata")
+            return "Çikolata";
+        else if($str == "cay")
+            return "Çay, Kahve ve Bitki Çayı";
+        else if($str == "yag")
+            return "Bitkisel Yağ ve Margarin";
+        else if($str == "sut")
+            return "Süt ve Süt ürünleri";
+        else if($str == "et")
+            return "Et ve Et ürünleri";
+        else if($str == "takviye")
+            return "Takviye Edici Gıdalar";
+        else if($str == "diger")
+            return "Diğer Ürünler";
+        else if($str == "bal")
+            return "Bal";
+        else
+            return "Yanlış";
     }
      
 ?>
@@ -555,7 +658,7 @@
     let yıl2 = document.getElementById("yıl2");
     yıl1.onclick =()=>{
         let yil1childs=yıl1.childNodes;
-        console.log(yil1childs);
+        //console.log(yil1childs);
         for (item of yil1childs)
             if(item.className=="option")
                 item.style.display="block";
@@ -564,7 +667,7 @@
         // ev.preventDefault();
         yil1Value=yıl1.value;
         let yil2childs=yıl2.childNodes;
-        console.log(yil2childs);
+        //console.log(yil2childs);
         for (item of yil2childs){
             if(item.className=="option"&&yil1Value>=item.innerText){
                 item.style.display="none";
@@ -614,7 +717,7 @@
         for (item of divs){
             document.getElementsByClassName("slideshow-container")[0].insertBefore(item,document.getElementsByClassName("slideshow-container")[0].firstChild);
         }
-        console.log( document.getElementsByClassName("prev")[0]);
+        //console.log( document.getElementsByClassName("prev")[0]);
         document.getElementsByClassName("prev")[0].click();
     }
     function createMapDivs(year){
