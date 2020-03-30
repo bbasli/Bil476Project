@@ -88,7 +88,7 @@
             var chart = new CanvasJS.Chart(id, {
                 animationEnabled: true,
                 title: {
-                    text: "Distribution of Products by " + text-align
+                    text: "Distribution of Products by " + text
                 },
                 subtitles: [{
                     text: "2014-2020"
