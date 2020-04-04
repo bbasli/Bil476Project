@@ -71,7 +71,6 @@
       echo SimpleXLSX::parseError();
     }
     }
-      //echo "Num of rows : " . mysqli_num_rows($res);
       header("Location: showCharts.php");
 
     
@@ -94,4 +93,3 @@
 
      return $str;
   }
-?>
