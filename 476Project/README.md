@@ -13,13 +13,13 @@ NOTE: It may take some time to create the database (max:1-2mins)
 
 Some visuals from the site: 
 
-![](images/distCateg.PNG)
+![](images/sehirDagilimi.PNG)
 
 
-![](images/distCities.PNG)
+![](images/kategoriDagilimi.PNG)
 
 
-![](images/lineByYears.PNG)
+![](images/yilDagilimi.PNG)
 
 
 ![](images/hm1.PNG)
