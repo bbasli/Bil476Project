@@ -17,7 +17,7 @@
   $serial_number = "";
   $date = "";
   $check = false;
-  $files = array("2.2020", "2020", "07012015", "12202019", "17122016", "22072015", "23032018", "28102014", "31122015", "tarihsiz", "19102019", "31082016");
+  $files = array("3.2020", "2.2020", "2020", "07012015", "12202019", "17122016", "22072015", "23032018", "28102014", "31122015", "tarihsiz", "19102019", "31082016");
 
   $res = mysqli_query($conn, "SELECT * FROM products");
   if(!$res){
@@ -67,13 +67,12 @@
             $check = true;
             
           }
-    }else {
-      echo SimpleXLSX::parseError();
+        }else {
+          echo SimpleXLSX::parseError();
+        }
     }
-    }
-      header("Location: showCharts.php");
-
     
+    header("Location: showCharts.php");
   }
 
   function handleChar($str){

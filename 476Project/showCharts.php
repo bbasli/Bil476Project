@@ -75,14 +75,14 @@
         }
 
 
-        function showLineChart(id, dataPoints, products) {
+        function showLineChart(id, dataPoints) {
 
             var chart = new CanvasJS.Chart(id, {
                 title: {
-                    text: "Distribution of Products by Years"
+                    text: "Ürünlerin Yıl Dağılımı"
                 },
                 axisY: {
-                    title: "Number of Adulterated " + products
+                    title: "Tahşiş Ürün Sayısı"
                 },
                 data: [{
                     type: "line",
@@ -97,7 +97,7 @@
             var chart = new CanvasJS.Chart(id, {
                 animationEnabled: true,
                 title: {
-                    text: "Distribution of Products by " + text
+                    text: "Ürünlerin " + text + " Dağılımı"
                 },
                 subtitles: [{
                     text: "2014-2020"
@@ -533,19 +533,19 @@
                 if (count($dataPie) > 0) {
         ?>
                     <script type=text/javascript> setTimeout(()=> createDivz(0,2), 1000);
-                    setTimeout(() => showDataPie("chart", <?php echo json_encode($dataPie, JSON_NUMERIC_CHECK); ?>, <?php echo json_encode("Cities", JSON_NUMERIC_CHECK); ?>), 1000);   
+                    setTimeout(() => showDataPie("chart", <?php echo json_encode($dataPie, JSON_NUMERIC_CHECK); ?>, <?php echo json_encode("Şehir", JSON_NUMERIC_CHECK); ?>), 1000);   
                  </script>
                 <?php
                 }
                 if (count($dataCategory) > 0) {
                 ?>
-                    <script type=text/javascript> setTimeout(()=> showDataPie("chart1", <?php echo json_encode($dataCategory, JSON_NUMERIC_CHECK); ?>, <?php echo json_encode("Categories", JSON_NUMERIC_CHECK); ?>), 1000);
+                    <script type=text/javascript> setTimeout(()=> showDataPie("chart1", <?php echo json_encode($dataCategory, JSON_NUMERIC_CHECK); ?>, <?php echo json_encode("Kategori", JSON_NUMERIC_CHECK); ?>), 1000);
                     </script>
                 <?php
                 }
                 if (count($lineDataPoints) > 0) {
                 ?>
-                    <script type=text/javascript> setTimeout(()=> showLineChart("chart2", <?php echo json_encode($lineDataPoints, JSON_NUMERIC_CHECK); ?>, "Products"), 1000);
+                    <script type=text/javascript> setTimeout(()=> showLineChart("chart2", <?php echo json_encode($lineDataPoints, JSON_NUMERIC_CHECK); ?>), 1000);
                     setTimeout(() => showHeatmap("all", <?php echo json_encode($all); ?>, 0), 1000);
                 </script>
                     <?php
