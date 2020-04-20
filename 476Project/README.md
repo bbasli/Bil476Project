@@ -1,3 +1,4 @@
+<pre>
 For Windows
 	1)download and install xampp (https://www.apachefriends.org/download.html)
 	2)Start apache and mysql from xampp Control panel
@@ -12,7 +13,7 @@ NOTE: It may take some time to create the database (max:1-2mins)
 	After find php.ini, find this line "max_execution_time = 30" in php.ini and set this like "max_execution_time=360" and try again.
 
 Some visuals from the site: 
-
+</pre>
 ![](images/sehirDagilimi.PNG)
 
 
